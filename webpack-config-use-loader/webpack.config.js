@@ -34,9 +34,84 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins: function () {
-                return [require('autoprefixer')];
+                return [ require('postcss-import'), require('autoprefixer')];
               }
             }
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [ require('postcss-import'), require('autoprefixer')];
+              }
+            }
+          },
+          {
+            loader: 'less-loader'
+          }
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [ require('postcss-import'), require('autoprefixer')];
+              }
+            }
+          },
+          {
+            loader: 'stylus-loader'
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader'
+          }
+        ]
+      },
+      {
+        test: /\.tpl$/,
+        use: [
+          {
+            loader: 'ejs-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1000,
+              name: 'assets/[name]-[hash:5].[ext]'
+            }
+          },
+          {
+            loader: 'image-webpack-loader'
           }
         ]
       }
